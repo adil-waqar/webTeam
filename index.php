@@ -30,6 +30,10 @@ if (isset($_POST['submit'])) {
             $query = "INSERT INTO review (name, contact, email, review ) VALUES ('$name', '$contact',' $email', '$review')";
             if ($query_run = mysqli_query($sqlconnect, $query)) {
                 $success['success'] = "Form submitted successfully!";
+                $name = '';
+                $contact = '';
+                $email = '';
+                $review = '';
             } else {
                 echo "ERROR: Could not able to execute. " . mysqli_error($sqlconnect);
             }
