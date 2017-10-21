@@ -23,7 +23,18 @@ if (isset($_POST['submit'])) {
             $errors['contact'] = "11 digit contact number allowed without hyphens.";
         }
 
-
+        // pdf validation
+        $extension = strtolower(substr($name1, strpos($name1, '.') + 1));
+        $location = 'Uploads/';
+        if (isset($name1)) {
+            if (!empty($name1)) {
+                if ($extension == "pdf" && $type == "application/pdf" && $sizeInMbs < 2) {
+                    move_uploaded_file($templocation, $location.time().$name1);
+                } else {
+                    $errors['fileUpload'] = 'Please only upload pdf files and less than 2MB. ';
+                }
+            }
+        }
 
         if (count($errors) == 0) {
             $contact = htmlspecialchars($_POST['contact']);
@@ -37,19 +48,7 @@ if (isset($_POST['submit'])) {
             } else {
                 echo "ERROR: Could not able to execute. " . mysqli_error($sqlconnect);
             }
-            // image/jpeg
-            $extension = strtolower(substr($name1, strpos($name1, '.') + 1));
 
-            $location = 'Uploads/';
-            if (isset($name1)) {
-                if (!empty($name1)) {
-                    if ($extension == "pdf" && $type == "application/pdf" && $sizeInMbs < 2) {
-                        move_uploaded_file($templocation, $location.time().$name1);
-                    } else {
-                        $errors['fileUpload'] = 'Please only upload pdf files and less than 2MB. ';
-                    }
-                }
-            }
         }
     }
 }
