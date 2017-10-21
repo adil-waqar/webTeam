@@ -11,7 +11,7 @@ if($sqlconnect)
 }
 else{
 
-	echo "Connection to database failed! ";
+	$errors['database'] = "Connection to database failed! ";
 }
 
 

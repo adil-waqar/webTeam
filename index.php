@@ -1,7 +1,7 @@
 <?php
-require 'connect_DB.php';
 $errors = [];
 $success = [];
+require 'connect_DB.php';
 if (isset($_POST['submit'])) {
     $name = htmlspecialchars($_POST['name']);
     $contact = htmlspecialchars($_POST['contact']);
